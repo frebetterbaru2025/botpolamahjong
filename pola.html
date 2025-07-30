@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bot Pola Mahjong 1/2</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      padding: 20px;
+      color: #2c3e50;
+    }
+
+    h1 {
+      text-align: center;
+      color: #e67e22;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      text-align: center;
+      font-size: 16px;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    button {
+      background: #2ecc71;
+      color: white;
+      font-size: 18px;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #27ae60;
+      box-shadow: 0 6px 20px rgba(39, 174, 96, 0.6);
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 500px;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    li {
+      font-size: 18px;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    li:last-child {
+      border-bottom: none;
+      font-weight: bold;
+      color: #27ae60;
+    }
+
+    .linkbox {
+      background: #fff8e1;
+      border-left: 5px solid #f39c12;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 15px;
+      margin-top: 20px;
+    }
+
+    .linkbox a {
+      color: #2980b9;
+      font-weight: bold;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 24px;
+      }
+
+      button {
+        font-size: 16px;
+        padding: 10px 20px;
+      }
+
+      li {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bot Pola Mahjong 1/2</h1>
+  <p class="description">Jika udah menang gausah nafsu, langsung WD-in aja.</p>
+
+  <div class="button-container">
+    <button onclick="generateRandomSpinList()">🎰 Generate Pola</button>
+  </div>
+
+  <div class="card">
+    <ul id="outputList">
+      <li style="text-align:center; color:#aaa;">Klik tombol di atas untuk mulai</li>
+    </ul>
+  </div>
+
+  <div class="linkbox">
+    Pola ini berlaku untuk semua APK yang ada di sini:<br>
+    <a href="https://web.facebook.com/flx/warn/?u=https://justpaste.it/k06gn" target="_blank">
+      https://justpaste.it/k06gn
+    </a>
+  </div>
+
+  <script>
+    function getRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function generateRandomSpinList() {
+      const spinOtomatisOptions = ["10X", "30X", "50X", "80X", "100X"];
+      const turboOptions = ["TURBO ON", "TURBO OFF"];
+      const betOptions = ["0,40K", "0,80K", "1K", "1,20K", "1,60K", "1,80K", "2K", "4K"];
+
+      const list = document.getElementById("outputList");
+      list.innerHTML = "";
+
+      const totalLines = Math.floor(Math.random() * 3) + 3; // 3–5 baris
+
+      for (let i = 0; i < totalLines; i++) {
+        const isManual = Math.random() < 0.5;
+        const spinType = isManual ? "SPIN MANUAL" : "SPIN OTOMATIS";
+        const spinCount = isManual
+          ? Math.floor(Math.random() * 10) + 1 + "X"
+          : getRandom(spinOtomatisOptions);
+        const turbo = getRandom(turboOptions);
+        const text = `${spinType} ${spinCount} (${turbo})`;
+        const li = document.createElement("li");
+        li.textContent = text;
+        list.appendChild(li);
+      }
+
+      // Tambahkan BET di akhir
+      const bet = getRandom(betOptions);
+      const betItem = document.createElement("li");
+      betItem.textContent = `BET ${bet}`;
+      list.appendChild(betItem);
+    }
+  </script>
+
+</body>
+</html>
